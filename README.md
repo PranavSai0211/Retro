@@ -14,7 +14,7 @@
 
 ## 📸 Preview
 
-![Screenshot of website](screenshot.png) <!-- Add screenshot.png in repo for preview -->
+![Screenshot of website](screenshot.png) <!-- Add screenshot.png in repo for preview -->"C:\Users\prana\Pictures\Screenshots\Screenshot 2025-06-03 220141.png"
 
 ---
 
@@ -24,7 +24,6 @@
 - 🖼️ Logo branding and dual titles
 - 🏏 Filterable by sport: Football or Cricket
 - 📦 Static HTML/CSS/JS – lightweight and easy to deploy
-- 📱 Fully responsive and mobile-friendly
 - ⚡ Smooth animations and hover effects
 
 ---
