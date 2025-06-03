@@ -3,26 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Retro Jersey Shop - Football & Cricket</title>
+  <title>Classic Stripes & Stitches - Retro Jerseys</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+      background: linear-gradient(to bottom, #fdd835, #ffb300, #ff7043);
     }
 
     header {
-      background-color: #333;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
       color: #fff;
-      padding: 20px 0;
       text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .logo {
+      width: 60px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 10px 0 5px;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 5px;
     }
 
     nav {
+      background-color: #ff6f61;
       display: flex;
       justify-content: center;
-      background-color: #444;
       flex-wrap: wrap;
     }
 
@@ -30,18 +47,40 @@
       color: #fff;
       padding: 14px 20px;
       text-decoration: none;
-      transition: background 0.3s ease;
+      font-weight: bold;
     }
 
     nav a:hover {
-      background-color: #555;
+      background-color: #ff8a65;
+    }
+
+    .filter-bar {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(to right, #ffe0b2, #ffe082);
+    }
+
+    .filter-bar button {
+      background: #2196f3;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .filter-bar button:hover {
+      background: #1976d2;
     }
 
     .container {
-      padding: 30px 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      padding: 30px 20px;
     }
 
     .product {
@@ -50,7 +89,7 @@
       padding: 20px;
       width: 240px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       transition: transform 0.2s;
       border-radius: 10px;
     }
@@ -74,23 +113,25 @@
       display: inline-block;
       margin-top: 10px;
       color: white;
-      background-color: #28a745;
+      background-color: #4caf50;
       padding: 10px 15px;
       text-decoration: none;
       border-radius: 5px;
       font-weight: bold;
-      transition: background 0.3s ease;
     }
 
     .product a:hover {
-      background-color: #218838;
+      background-color: #388e3c;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Retro Jersey Shop</h1>
+    <img src="logo.png" alt="Retro Jersey Logo" class="logo" />
+    <h1>Classic Stripes & Stitches</h1>
+    <p class="tagline">Relive the Golden Age of Sportswear</p>
   </header>
+
   <nav>
     <a href="#">Home</a>
     <a href="#">Football</a>
@@ -98,8 +139,15 @@
     <a href="#">About Us</a>
     <a href="#">Contact</a>
   </nav>
+
+  <div class="filter-bar">
+    <button onclick="filterProducts('all')">All</button>
+    <button onclick="filterProducts('football')">Football</button>
+    <button onclick="filterProducts('cricket')">Cricket</button>
+  </div>
+
   <div class="container" id="product-container">
-    <!-- Products will be loaded here dynamically -->
+    <!-- Products will load here -->
   </div>
 
   <script>
@@ -107,37 +155,56 @@
       {
         title: "1990s Brazil Football Jersey",
         img: "https://i.etsystatic.com/55642403/r/il/9db4d5/6401016896/il_300x300.6401016896_926t.jpg",
-        link: "/buy/brazil"
+        link: "/buy/brazil",
+        category: "football"
       },
       {
         title: "1996 India Cricket Jersey",
         img: "https://m.media-amazon.com/images/I/61rN6eX3HsL._AC_UY1100_.jpg",
-        link: "/buy/india"
+        link: "/buy/india",
+        category: "cricket"
       },
       {
         title: "1998 France Football Jersey",
         img: "https://indiansoccermart.in/cdn/shop/files/330ec2b9be071ce85fef014f467cadc7.png-z-0_0_f-webp_grande.webp?v=1731158601",
-        link: "/buy/france"
+        link: "/buy/france",
+        category: "football"
       },
       {
         title: "2003 Australia Cricket Jersey",
         img: "https://ik.imagekit.io/wds/image/cache/temp/httpswww.whitedotsports.comimagecatalog0001australia3-2025x2025.webp",
-        link: "/buy/australia"
+        link: "/buy/australia",
+        category: "cricket"
       }
     ];
 
     const container = document.getElementById('product-container');
 
-    products.forEach(product => {
-      const productDiv = document.createElement('div');
-      productDiv.className = 'product';
-      productDiv.innerHTML = `
-        <img src="${product.img}" alt="${product.title}" />
-        <h2>${product.title}</h2>
-        <a href="${product.link}">Buy Now</a>
-      `;
-      container.appendChild(productDiv);
-    });
+    function displayProducts(filtered) {
+      container.innerHTML = '';
+      (filtered || products).forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+        productDiv.innerHTML = `
+          <img src="${product.img}" alt="${product.title}" />
+          <h2>${product.title}</h2>
+          <a href="${product.link}">Buy Now</a>
+        `;
+        container.appendChild(productDiv);
+      });
+    }
+
+    function filterProducts(type) {
+      if (type === 'all') {
+        displayProducts(products);
+      } else {
+        displayProducts(products.filter(p => p.category === type));
+      }
+    }
+
+    // Display all on load
+    displayProducts(products);
   </script>
 </body>
 </html>
+
